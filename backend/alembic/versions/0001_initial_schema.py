@@ -346,7 +346,7 @@ def upgrade():
     )
     with op.batch_alter_table('booking_seats', schema=None) as batch_op:
         batch_op.create_index(batch_op.f('ix_booking_seats_booking_id'), ['booking_id'], unique=False)
-        batch_op.create_index('uq_active_show_seat', ['show_id', 'seat_id'], unique=True, postgresql_where=sa.text('is_active IS 1'), sqlite_where=sa.text('is_active IS 1'))
+        batch_op.create_index('uq_active_show_seat', ['show_id', 'seat_id'], unique=True, postgresql_where=sa.text('is_active IS TRUE'), sqlite_where=sa.text('is_active IS 1'))
 
     op.create_table('coupon_usages',
     sa.Column('id', sa.Integer(), nullable=False),
@@ -426,7 +426,7 @@ def downgrade():
     op.drop_table('food_orders')
     op.drop_table('coupon_usages')
     with op.batch_alter_table('booking_seats', schema=None) as batch_op:
-        batch_op.drop_index('uq_active_show_seat', postgresql_where=sa.text('is_active IS 1'), sqlite_where=sa.text('is_active IS 1'))
+        batch_op.drop_index('uq_active_show_seat', postgresql_where=sa.text('is_active IS TRUE'), sqlite_where=sa.text('is_active IS 1'))
         batch_op.drop_index(batch_op.f('ix_booking_seats_booking_id'))
 
     op.drop_table('booking_seats')
