@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body { font-family: Inter, system-ui, sans-serif; }
+
+@layer components {
+  .btn { @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-sm font-semibold transition focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-soft disabled:opacity-50 disabled:cursor-not-allowed; }
+  .btn-primary { @apply btn bg-brand text-white hover:bg-red-600; }
+  .btn-ghost { @apply btn border border-edge bg-panel text-slate-200 hover:border-brand-soft; }
+  .btn-danger { @apply btn bg-red-900/60 text-red-200 hover:bg-red-800; }
+  .card { @apply rounded-xl border border-edge bg-panel p-5; }
+  .input { @apply w-full rounded-lg border border-edge bg-ink px-3 py-2.5 text-sm text-slate-100 placeholder:text-slate-500 focus:border-brand-soft focus:outline-none focus-visible:ring-1 focus-visible:ring-brand-soft; }
+  .label { @apply mb-1 block text-xs font-medium uppercase tracking-wide text-slate-400; }
+  .chip { @apply rounded-md border border-edge px-2.5 py-1 text-xs text-slate-300; }
+  .th { @apply px-3 py-2 text-left text-xs uppercase tracking-wide text-slate-400; }
+  .td { @apply px-3 py-2 text-sm; }
+}
+
+/* seat states */
+.seat { @apply flex h-8 w-8 items-center justify-center rounded-t-lg rounded-b text-[10px] font-semibold transition select-none sm:h-9 sm:w-9; }
+
+/* Dropdowns: larger, custom arrow, consistent with the dark theme */
+select.input {
+  @apply min-h-[2.9rem] min-w-[9.5rem] cursor-pointer appearance-none py-3 pl-4 pr-11 text-[15px] font-medium text-slate-100;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.85rem center;
+  background-size: 1.15rem;
+}
+select.input:hover { @apply border-slate-500; }
+select.input:focus { @apply border-brand-soft ring-1 ring-brand-soft; }
+select option { background-color: #12151c; color: #e2e8f0; padding: 0.75rem 1rem; font-size: 15px; }
+select option:checked { background-color: #d9363e; color: #fff; }
+input[type='date'], input[type='datetime-local'] { color-scheme: dark; min-height: 2.9rem; }

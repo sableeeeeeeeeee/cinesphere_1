@@ -1,0 +1,19 @@
+# Starts PostgreSQL (+ Redis, reserved for future distributed locks). Run the app itself locally, see README.
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: cinesphere
+      POSTGRES_PASSWORD: cinesphere
+      POSTGRES_DB: cinesphere
+    ports: ["5432:5432"]
+    volumes: [pgdata:/var/lib/postgresql/data]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U cinesphere"]
+      interval: 5s
+      retries: 10
+  redis:
+    image: redis:7
+    ports: ["6379:6379"]
+volumes:
+  pgdata:
